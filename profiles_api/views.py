@@ -14,7 +14,7 @@ class HelloApiView(APIView):
             name = serializer.data.get('name')
             return Response({"method": "POST", "value": name})
         else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUESTS)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
     def put(self, req, pk=None):
         return Response({"method": "PUT"})
