@@ -61,3 +61,11 @@ class HelloViewSet(viewsets.ViewSet):
     def retrieve(self, req, pk=None):
         """Function for getting an object"""
         return Response({"method": "Retrieve", "pk": pk})
+    
+    def update(self, req, pk=None):
+        """Functon to update"""
+        return Response({"method": "Update"})
+    
+    def partial_update(self, req, pk=None):
+        """Function to try partial_update"""
+        return Response({"method": "Partial Update"})
