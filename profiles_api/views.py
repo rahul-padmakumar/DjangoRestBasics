@@ -57,3 +57,7 @@ class HelloViewSet(viewsets.ViewSet):
                 serialized_data.errors,
                 status=status.HTTP_400_BAD_REQUEST
             )
+        
+    def retrieve(self, req, pk=None):
+        """Function for getting an object"""
+        return Response({"method": "Retrieve", "pk": pk})
