@@ -2,8 +2,9 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import HelloSerializer
+from .serializers import HelloSerializer, ProfileSerializer
 from rest_framework import viewsets
+from .models import UserProfile
 
 # Create your views here.
 class HelloApiView(APIView):
@@ -73,3 +74,8 @@ class HelloViewSet(viewsets.ViewSet):
     def destroy(self, req, pk=None):
         """Function to try delete"""
         return Response({"method":"Delete"})
+    
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    serializer_class = ProfileSerializer
+    queryset = UserProfile.objects.all()
