@@ -28,7 +28,12 @@ class HelloApiView(APIView):
 
 
 class HelloViewSet(viewsets.ViewSet):
+    """ Class to try out working of viewset """
+
+    serializer_class = HelloSerializer
+
     def list(self, req):
+        """ This function returns list"""
         return Response(
             {
                 "message": [
@@ -39,3 +44,16 @@ class HelloViewSet(viewsets.ViewSet):
                 "method": "GET"
             }
         )
+    
+    
+    def create(self, req):
+        """ function for create"""
+        serialized_data = self.serializer_class(data = req.data)
+        if serialized_data.is_valid():
+            name = serialized_data.validated_data.get("name")
+            return Response({"method": "CREATE", "value": name})
+        else:
+            return Response(
+                serialized_data.errors,
+                status=status.HTTP_400_BAD_REQUEST
+            )
