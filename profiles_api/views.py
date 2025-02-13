@@ -69,3 +69,7 @@ class HelloViewSet(viewsets.ViewSet):
     def partial_update(self, req, pk=None):
         """Function to try partial_update"""
         return Response({"method": "Partial Update"})
+    
+    def destroy(self, req, pk=None):
+        """Function to try delete"""
+        return Response({"method":"Delete"})
