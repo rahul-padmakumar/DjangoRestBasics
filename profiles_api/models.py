@@ -34,3 +34,6 @@ class ProfileFeedItem(models.Model):
 
     def __str__(self):
         return f"{self.status_txt}"
+
+class GenericModel(models.Model):
+    points = models.CharField(max_length=255)

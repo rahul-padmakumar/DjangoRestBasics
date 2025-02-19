@@ -8,8 +8,9 @@ from rest_framework import filters
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
-from .serializers import HelloSerializer, ProfileSerializer, ProfileFeedSerializer
-from .models import UserProfile, ProfileFeedItem
+from rest_framework.generics import CreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView, ListCreateAPIView, RetrieveUpdateAPIView, RetrieveDestroyAPIView, RetrieveUpdateDestroyAPIView
+from .serializers import HelloSerializer, ProfileSerializer, ProfileFeedSerializer, GenericSerializer
+from .models import UserProfile, ProfileFeedItem, GenericModel
 from . import permissions
 
 # Create your views here.
@@ -103,4 +104,35 @@ class ProfileFeedViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user_profile=self.request.user)
         return super().perform_create(serializer)
+    
+class CreateGenericView(CreateAPIView):
+    serializer_class = GenericSerializer
+
+class RetrieveGenericView(RetrieveAPIView):
+    serializer_class = GenericSerializer
+    queryset = GenericModel.objects.all()
+
+class UpdateGenericView(UpdateAPIView):
+    serializer_class = GenericSerializer
+    queryset = GenericModel.objects.all()
+
+class DeleteGenericView(DestroyAPIView):
+    serializer_class = GenericSerializer
+    queryset = GenericModel.objects.all()
+
+class ListCreateGenericView(ListCreateAPIView):
+    serializer_class = GenericSerializer
+    queryset = GenericModel.objects.all()
+
+class RetrieveUpdateView(RetrieveUpdateAPIView):
+    serializer_class = GenericSerializer
+    queryset = GenericModel.objects.all()
+
+class RetrieveDestroyView(RetrieveDestroyAPIView):
+    serializer_class = GenericSerializer
+    queryset = GenericModel.objects.all()
+
+class RetrieveDestroyUpdateView(RetrieveUpdateDestroyAPIView):
+    serializer_class = GenericSerializer
+    queryset = GenericModel.objects.all()
     
